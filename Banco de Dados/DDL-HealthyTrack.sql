@@ -1,7 +1,9 @@
 --DDL
 CREATE DATABASE HealthyTrack
+GO
 
 USE HealthyTrack
+GO
 
 CREATE TABLE Usuario (
 
@@ -11,6 +13,7 @@ senha_usuario		VARCHAR(100) NOT NULL,
 numero_usuario		INT NOT NULL,
 altura_usuario		INT NOT NULL		
 );
+GO
 
 CREATE TABLE HistoricoPeso (
 
@@ -19,6 +22,7 @@ data_lista      DATE NOT NULL,
 peso_lista		FLOAT NOT NULL
 
 );
+GO
 
 CREATE TABLE PressaoUsuario (
 
@@ -26,11 +30,13 @@ id_usuario		INT FOREIGN KEY REFERENCES Usuario (id_usuario),
 p_arterial      INT NOT NULL
 
 );
+GO
 
 CREATE TABLE IntensidadeAtividade (
 id_intesidade        INT PRIMARY KEY IDENTITY, 
 nome_atividade       VARCHAR(50) NOT NULL,
 )
+GO
 
 CREATE TABLE AtividadeFisica (
 
@@ -41,6 +47,7 @@ id_intesidade		INT FOREIGN KEY REFERENCES IntensidadeAtividade (id_intesidade),
 data_atividade      DATE NOT NULL
 
 );
+GO
 
 CREATE TABLE Alimentos (
 
