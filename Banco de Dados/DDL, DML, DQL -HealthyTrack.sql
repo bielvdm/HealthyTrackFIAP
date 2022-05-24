@@ -1,5 +1,4 @@
 --CRIAR TABELAS
-DROP TABLE T_ATIVIDADE_FISICA PURGE;
 
 CREATE TABLE T_USUARIO (
 ID_USUARIO          INT NOT NULL, 
@@ -50,19 +49,19 @@ ID_USUARIO		    INT REFERENCES T_USUARIO (ID_USUARIO)
 
 -- INSERT (CADASTRAR DADOS)
 
--- Cadastrar os dados do usu·rio. 
+-- Cadastrar os dados do usu√°rio. 
 
 INSERT INTO T_USUARIO (ID_USUARIO, NOME_USUARIO, EMAIL_USUARIO, SENHA_USUARIO, NUMERO_USUARIO, ALTURA_USUARIO) 
     VALUES  (2, 'CARLOS ALBERTO', 'CARLOSALBE@GMAIL.COM', 'CARLOS123', '1654321', '1,78');
 
--- Cadastrar os dados para o peso do usu·rio.
+-- Cadastrar os dados para o peso do usu√°rio.
 
 INSERT INTO T_HISTORICO_PESO (ID_HIST_PESO, DATA_LISTA, PESO_LISTA, ID_USUARIO)
     VALUES  (6,
         TO_DATE('30/05/2022', 'DD/MM/YYYY'),
         '68,6', 1);
        
--- Cadastrar os dados para a press„o arterial do usu·rio. 
+-- Cadastrar os dados para a press√£o arterial do usu√°rio. 
 INSERT INTO T_PRES_USUARIO (P_ID, P_ARTERIAL, P_DATA_HORA, ID_USUARIO)
     VALUES (3,'12,0/8,0',
         TO_DATE('12/05/2022 17:30', 'DD/MM/YYYY HH24:MI'),1);
@@ -75,13 +74,13 @@ INSERT INTO T_ATIVIDADE_FISICA (ID_ATIVIDADE_FISICA, ID_INTESIDADE, ID_USUARIO, 
     TO_DATE('12/05/2022', 'DD/MM/YYYY')
     );
 
--- Cadastrar os dados para o alimento consumido pelo usu·rio.  
+-- Cadastrar os dados para o alimento consumido pelo usu√°rio.  
 INSERT INTO T_ALIMENTOS (ID_ALIMENTO, ID_USUARIO, NOME_ALIMENTOS, QNT_ALIMENTOS)
 VALUES					(1, 2, 'Chocolate', 3);
   
 
 -- UPDATE (ATUALIZAR DADOS)
--- Alterar todos os dados do usu·rio, utilizando seu cÛdigo como referÍncia. 
+-- Alterar todos os dados do usu√°rio, utilizando seu c√≥digo como refer√™ncia. 
 
 UPDATE T_USUARIO
     SET NOME_USUARIO = 'RODRIGO MARTINS',
@@ -91,12 +90,12 @@ UPDATE T_USUARIO
         ALTURA_USUARIO = '1,70'
     WHERE ID_USUARIO = 1;
 
--- Alterar todos os dados de peso do usu·rio, utilizando o cÛdigo como referÍncia.
+-- Alterar todos os dados de peso do usu√°rio, utilizando o c√≥digo como refer√™ncia.
 UPDATE T_HISTORICO_PESO
     SET DATA_LISTA = TO_DATE('15/05/2022', 'DD/MM/YYYY'),
         PESO_LISTA = '70,5'
         
--- Alterar todos os dados de peso do usu·rio, utilizando o cÛdigo como referÍncia. 
+-- Alterar todos os dados de peso do usu√°rio, utilizando o c√≥digo como refer√™ncia. 
 UPDATE T_PRES_USUARIO
     SET P_ARTERIAL = '15.5/10.5',
         ID_USUARIO = '1'
@@ -109,7 +108,7 @@ UPDATE  T_ATIVIDADE_FISICA
         TEMPO_ATIVIDADE = '25,0',
         DATA_ATIVIDADE = TO_DATE('18/05/2022', 'DD/MM/YYYY')
         
--- Alterar todos os dados para o alimento consumido pelo usu·rio, utilizando o cÛdigo como referÍncia.
+-- Alterar todos os dados para o alimento consumido pelo usu√°rio, utilizando o c√≥digo como refer√™ncia.
 UPDATE T_ALIMENTOS 
 SET
 	NOME_ALIMENTOS = 'Morango',
@@ -124,27 +123,27 @@ SELECT NOME_USUARIO, EMAIL_USUARIO, SENHA_USUARIO, NUMERO_USUARIO, ALTURA_USUARI
    FROM T_USUARIO 
    WHERE ID_USUARIO = 1;
    
--- Consultar todos os dados de todos os registros de peso de um determinado usu·rio, ordenando-os dos registros mais recentes para os mais antigos (filtrar a partir do seu cÛdigo).
+-- Consultar todos os dados de todos os registros de peso de um determinado usu√°rio, ordenando-os dos registros mais recentes para os mais antigos (filtrar a partir do seu c√≥digo).
 SELECT DATA_LISTA, PESO_LISTA
     FROM T_HISTORICO_PESO
     WHERE ID_USUARIO = 1
     ORDER BY DATA_LISTA DESC;
 
--- Consultar todos os dados de um ˙nico registro de peso de um determinado usu·rio (filtrar a partir do cÛdigo do usu·rio e do cÛdigo de peso).
+-- Consultar todos os dados de um √∫nico registro de peso de um determinado usu√°rio (filtrar a partir do c√≥digo do usu√°rio e do c√≥digo de peso).
 SELECT * FROM T_HISTORICO_PESO
 WHERE ID_PESO = 3 AND ID_USUARIO = 2
 
--- Consultar todos os dados de todos os registros de alimentos ingeridos de um determinado usu·rio, ordenando-os dos registros mais recentes para os mais antigos (filtrar a partir do seu cÛdigo).
+-- Consultar todos os dados de todos os registros de alimentos ingeridos de um determinado usu√°rio, ordenando-os dos registros mais recentes para os mais antigos (filtrar a partir do seu c√≥digo).
 
 SELECT * FROM T_ALIMENTOS 
 WHERE ID_USUARIO = 2
 ORDER BY ID_ALIMENTO DESC
 
--- Consultar todos os dados de um ˙nico registro de alimento ingerido de um determinado usu·rio (filtrar a partir do cÛdigo do usu·rio e do cÛdigo de alimento).
+-- Consultar todos os dados de um √∫nico registro de alimento ingerido de um determinado usu√°rio (filtrar a partir do c√≥digo do usu√°rio e do c√≥digo de alimento).
 SELECT * FROM T_ALIMENTOS
 WHERE ID_ALIMENTO = 1 AND ID_USUARIO = 2
 
--- Consultar os dados b·sicos de um determinado usu·rio, o ˙ltimo peso registrado e a ˙ltima press„o arterial registrada (filtrar a partir do cÛdigo de usu·rio ñ consulta necess·ria para o dashboard. Dica: veja consulta com junÁıes).
+-- Consultar os dados b√°sicos de um determinado usu√°rio, o √∫ltimo peso registrado e a √∫ltima press√£o arterial registrada (filtrar a partir do c√≥digo de usu√°rio ‚Äì consulta necess√°ria para o dashboard. Dica: veja consulta com jun√ß√µes).
 -- faltam dados da pressao arterial
 
 SELECT * FROM T_USUARIO
@@ -155,13 +154,13 @@ SELECT ID_HIST_PESO, ID_USUARIO, DATA_LISTA, PESO_LISTA
     FROM T_HISTORICO_PESO
     WHERE ID_HIST_PESO = 1;
     
- -- Consultar todos os dados de todos os registros de press„o arterial de um determinado usu·rio, ordenando-os dos registros mais recentes para os mais antigos (filtrar a partir do seu cÛdigo).     
+ -- Consultar todos os dados de todos os registros de press√£o arterial de um determinado usu√°rio, ordenando-os dos registros mais recentes para os mais antigos (filtrar a partir do seu c√≥digo).     
 SELECT P_ID, ID_USUARIO, P_ARTERIAL,P_DATA_HORA
     FROM T_PRES_USUARIO
     WHERE ID_USUARIO = 1
     ORDER BY P_DATA_HORA DESC;
 
--- Consultar todos os dados de um ˙nico registro de press„o arterial de um determinado usu·rio (filtrar a partir do cÛdigo do usu·rio e do cÛdigo de press„o).
+-- Consultar todos os dados de um √∫nico registro de press√£o arterial de um determinado usu√°rio (filtrar a partir do c√≥digo do usu√°rio e do c√≥digo de press√£o).
 SELECT ID_USUARIO, P_ID, P_ARTERIAL, P_DATA_HORA
     FROM T_PRES_USUARIO
     WHERE ID_USUARIO = 1 AND P_ID = 1;
