@@ -34,6 +34,7 @@ DATA_ATIVIDADE      DATE NOT NULL
 );
 
 CREATE TABLE T_ALIMENTOS (
+ID_ALIMENTO         INT CONSTRAINT T_ALIMENTOS PRIMARY KEY,
 ID_USUARIO		    INT REFERENCES T_USUARIO (ID_USUARIO),
 NOME_ALIMENTOS      VARCHAR(80) NOT NULL,
 QNT_ALIMENTOS	    FLOAT NOT NULL
@@ -49,15 +50,19 @@ ID_USUARIO		    INT REFERENCES T_USUARIO (ID_USUARIO)
 
 -- INSERT (CADASTRAR DADOS)
 
+-- Cadastrar os dados do usuário. 
+
 INSERT INTO T_USUARIO (ID_USUARIO, NOME_USUARIO, EMAIL_USUARIO, SENHA_USUARIO, NUMERO_USUARIO, ALTURA_USUARIO) 
     VALUES  (2, 'CARLOS ALBERTO', 'CARLOSALBE@GMAIL.COM', 'CARLOS123', '1654321', '1,78');
 
+-- Cadastrar os dados para o peso do usuário.
 
 INSERT INTO T_HISTORICO_PESO (ID_HIST_PESO, DATA_LISTA, PESO_LISTA, ID_USUARIO)
     VALUES  (6,
         TO_DATE('30/05/2022', 'DD/MM/YYYY'),
         '68,6', 1);
-        
+       
+-- Cadastrar os dados para a pressão arterial do usuário. 
 INSERT INTO T_PRES_USUARIO (P_ID, P_ARTERIAL, P_DATA_HORA, ID_USUARIO)
     VALUES (3,'12,0/8,0',
         TO_DATE('12/05/2022 17:30', 'DD/MM/YYYY HH24:MI'),1);
@@ -69,9 +74,14 @@ INSERT INTO T_ATIVIDADE_FISICA (ID_ATIVIDADE_FISICA, ID_INTESIDADE, ID_USUARIO, 
     VALUES (1, 1, 1, 'BARRA FIXA', '15,5', 
     TO_DATE('12/05/2022', 'DD/MM/YYYY')
     );
+
+-- Cadastrar os dados para o alimento consumido pelo usuário.  
+INSERT INTO T_ALIMENTOS (ID_ALIMENTO, ID_USUARIO, NOME_ALIMENTOS, QNT_ALIMENTOS)
+VALUES					(1, 2, 'Chocolate', 3);
   
 
 -- UPDATE (ATUALIZAR DADOS)
+-- Alterar todos os dados do usuário, utilizando seu código como referência. 
 
 UPDATE T_USUARIO
     SET NOME_USUARIO = 'RODRIGO MARTINS',
@@ -81,10 +91,12 @@ UPDATE T_USUARIO
         ALTURA_USUARIO = '1,70'
     WHERE ID_USUARIO = 1;
 
+-- Alterar todos os dados de peso do usuário, utilizando o código como referência.
 UPDATE T_HISTORICO_PESO
     SET DATA_LISTA = TO_DATE('15/05/2022', 'DD/MM/YYYY'),
         PESO_LISTA = '70,5'
-
+        
+-- Alterar todos os dados de peso do usuário, utilizando o código como referência. 
 UPDATE T_PRES_USUARIO
     SET P_ARTERIAL = '15.5/10.5',
         ID_USUARIO = '1'
@@ -97,6 +109,13 @@ UPDATE  T_ATIVIDADE_FISICA
         TEMPO_ATIVIDADE = '25,0',
         DATA_ATIVIDADE = TO_DATE('18/05/2022', 'DD/MM/YYYY')
         
+-- Alterar todos os dados para o alimento consumido pelo usuário, utilizando o código como referência.
+UPDATE T_ALIMENTOS 
+SET
+	NOME_ALIMENTOS = 'Morango',
+	QNT_ALIMENTOS = 4
+WHERE ID_ALIMENTO = 1
+        
         
 
 -- SELECT (CONSULTAR DADOS)
@@ -104,22 +123,45 @@ UPDATE  T_ATIVIDADE_FISICA
 SELECT NOME_USUARIO, EMAIL_USUARIO, SENHA_USUARIO, NUMERO_USUARIO, ALTURA_USUARIO 
    FROM T_USUARIO 
    WHERE ID_USUARIO = 1;
-
+   
+-- Consultar todos os dados de todos os registros de peso de um determinado usuário, ordenando-os dos registros mais recentes para os mais antigos (filtrar a partir do seu código).
 SELECT DATA_LISTA, PESO_LISTA
     FROM T_HISTORICO_PESO
     WHERE ID_USUARIO = 1
     ORDER BY DATA_LISTA DESC;
 
-    
+-- Consultar todos os dados de um único registro de peso de um determinado usuário (filtrar a partir do código do usuário e do código de peso).
+SELECT * FROM T_HISTORICO_PESO
+WHERE ID_PESO = 3 AND ID_USUARIO = 2
+
+-- Consultar todos os dados de todos os registros de alimentos ingeridos de um determinado usuário, ordenando-os dos registros mais recentes para os mais antigos (filtrar a partir do seu código).
+
+SELECT * FROM T_ALIMENTOS 
+WHERE ID_USUARIO = 2
+ORDER BY ID_ALIMENTO DESC
+
+-- Consultar todos os dados de um único registro de alimento ingerido de um determinado usuário (filtrar a partir do código do usuário e do código de alimento).
+SELECT * FROM T_ALIMENTOS
+WHERE ID_ALIMENTO = 1 AND ID_USUARIO = 2
+
+-- Consultar os dados básicos de um determinado usuário, o último peso registrado e a última pressão arterial registrada (filtrar a partir do código de usuário – consulta necessária para o dashboard. Dica: veja consulta com junções).
+-- faltam dados da pressao arterial
+
+SELECT * FROM T_USUARIO
+INNER JOIN T_HISTORICO_PESO 
+ON T_HISTORICO_PESO.ID_USUARIO = T_USUARIO.ID_USUARIO
+
 SELECT ID_HIST_PESO, ID_USUARIO, DATA_LISTA, PESO_LISTA
     FROM T_HISTORICO_PESO
     WHERE ID_HIST_PESO = 1;
     
+ -- Consultar todos os dados de todos os registros de pressão arterial de um determinado usuário, ordenando-os dos registros mais recentes para os mais antigos (filtrar a partir do seu código).     
 SELECT P_ID, ID_USUARIO, P_ARTERIAL,P_DATA_HORA
     FROM T_PRES_USUARIO
     WHERE ID_USUARIO = 1
     ORDER BY P_DATA_HORA DESC;
 
+-- Consultar todos os dados de um único registro de pressão arterial de um determinado usuário (filtrar a partir do código do usuário e do código de pressão).
 SELECT ID_USUARIO, P_ID, P_ARTERIAL, P_DATA_HORA
     FROM T_PRES_USUARIO
     WHERE ID_USUARIO = 1 AND P_ID = 1;
