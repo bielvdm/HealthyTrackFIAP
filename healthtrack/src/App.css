@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap');
+
+* {
+  margin: 0;
+}
+
+.body-dash {
+  width: 100%;
+  height: 100vh;
+  background-color: #E9ECF5;
+  display: flex;
+  color: rgb(28, 28, 28);
+}
+
+.side-bar {
+  width: 80px;
+  height: 100%;
+  background-color: #a2d5ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-side-bar {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content-side-bar img {
+  width: 45px;
+  height: 45px;
+}
+
+.content-dashboard {
+  width: calc(100% - 80px);
+  height: 100%;
+  padding-left: 40px;
+  color: rgb(28, 28, 28);
+}
+
+.content-dashboard h1 {
+  margin: 0;
+  font-family: 'montserrat';
+  font-size: 35px;
+  font-weight: 1000;
+}
+
+.content-dashboard h3 {
+  margin: 0;
+  font-family: 'montserrat';
+  font-size: 20px;
+}
+
+.title-dash {
+  width: 50%;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.firstGraph {
+  width: 50%;
+  height: 100%;
+}
+
+.secondGraph {
+  width: 50%;
+  height: 100%;
+}
+
+.content-total {
+  width: 50%;
+  height: 15%;
+  display: flex;
+  margin-top: 10%;
+  justify-content: space-between;
+}
+
+.content-total div {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-family: 'montserrat';
+  border-radius: 5px;
+  background-color: #ffffff;
+  color: rgb(28, 28, 28);
+  box-shadow:  0 0 6px rgb(226, 226, 226)
+}
+
+.content-total div h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+.content-total div p {
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+.container-graphs {
+  width: 90%;
+  height: 45%;
+  display: flex;
+  justify-content: space-between;
+}
